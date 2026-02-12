@@ -1,0 +1,44 @@
+name: CI Cypress Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Baixar código
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      # 2️⃣ Instalar Node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3️⃣ Instalar dependências
+      - name: Instalar dependências
+        run: npm ci
+
+      # 4️⃣ Rodar testes Cypress
+      - name: Executar testes
+        run: npm run test
+
+      # 5️⃣ Gerar relatório Allure
+      - name: Gerar relatório Allure
+        run: |
+          npm install -g allure-commandline --save-dev
+          allure generate allure-results -o allure-report --clean
+
+      # 6️⃣ Salvar relatório como artefato
+      - name: Upload do relatório
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+
