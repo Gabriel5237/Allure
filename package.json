@@ -4,9 +4,9 @@
   "description": "",
   "main": "cypress.config.js",
   "scripts": {
-   "test": "cypress run",
-   "report:generate": "allure generate allure-results -o allure-report --clean",
-   "report:open": "allure open allure-report"
+    "test": "cypress run",
+    "report:generate": "allure generate allure-results -o allure-report --clean",
+    "report:open": "allure open allure-report"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Gabriel5237/Allure/issues"
   },
-  "homepage": "https://github.com/Gabriel5237/Allure#readme"
+  "homepage": "https://github.com/Gabriel5237/Allure#readme",
+  "devDependencies": {
+    "cypress": "^15.10.0"
+  }
 }
