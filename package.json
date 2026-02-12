@@ -4,7 +4,9 @@
   "description": "",
   "main": "cypress.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "test": "cypress run",
+   "report:generate": "allure generate allure-results -o allure-report --clean",
+   "report:open": "allure open allure-report"
   },
   "repository": {
     "type": "git",
