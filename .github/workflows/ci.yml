@@ -26,8 +26,8 @@ jobs:
         run: npm ci
 
       # 4️⃣ Rodar testes Cypress
-      - name: Executar testes
-        run: npm run test
+      - name: Executar testes Cypress
+        run: npx cypress run --headless
 
       # 5️⃣ Gerar relatório Allure
       - name: Gerar relatório Allure
