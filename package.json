@@ -20,6 +20,11 @@
   },
   "homepage": "https://github.com/Gabriel5237/Allure#readme",
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "allure-commandline": "^2.36.0",
     "cypress": "^15.10.0"
+  },
+  "dependencies": {
+    "commandline": "^0.0.2"
   }
 }
