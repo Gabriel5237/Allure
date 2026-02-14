@@ -1,1 +1,1 @@
-[]
+[{"uid":"d99572c829ea185c","name":"Deve acessar a página inicial","time":{"start":1771036123087,"stop":1771036123218,"duration":131},"status":"passed","severity":"normal"},{"uid":"1e87f496c70d931f","name":"deve passar","time":{"start":1771036123043,"stop":1771036123053,"duration":10},"status":"passed","severity":"normal"}]
