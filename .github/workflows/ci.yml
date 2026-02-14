@@ -9,12 +9,18 @@ jobs:
   cypress-tests:
     runs-on: ubuntu-latest
 
+    env:
+      API_TOKEN: ${{ secrets.API_TOKEN }}
+      BASE_URL: http://localhost:8080
+      ENVIRONMENT: dev
+
     steps:
-      # 1️⃣ Baixar código
+
+      # 1️⃣ Checkout do código
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      # 2️⃣ Instalar Node
+      # 2️⃣ Setup Node
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -24,31 +30,25 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      # 4️⃣ Rodar testes Cypress
+      # 4️⃣ Iniciar aplicação
+      - name: Start application
+        run: npx serve . -l 8080 &
+
+      # 5️⃣ Esperar aplicação subir
+      - name: Wait for app
+        run: npx wait-on http://localhost:8080
+
+      # 6️⃣ Executar testes Cypress
       - name: Executar testes Cypress
         run: npx cypress run --headless
 
-      # 5️⃣ Gerar relatório Allure
-      - name: Gerar relatório Allure
-        run: |
-          npm install -g allure-commandline --save-dev
-          allure generate allure-results -o allure-report --clean
-
-      # 6️⃣ Salvar relatório como artefato
-      - name: Upload do relatório
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: allure-report
-
+      # 7️⃣ Gerar relatório Allure
       - name: Gerar relatório Allure
         run: npx allure generate allure-results --clean -o allure-report
 
+      # 8️⃣ Publicar no GitHub Pages
       - name: Deploy GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
-
-
-
